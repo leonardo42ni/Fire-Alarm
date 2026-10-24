@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="ttl" value="Luồng dữ liệu: SED → Border Router → HiveMQ Cloud → Web Dashboard" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="10" width="747" height="26" as="geometry" />
+    </mxCell>
+
+    <!-- ===== LEFT: ESP32 Border Router ===== -->
+    <mxCell id="lbl_l" value="ESP32 Border Router" style="text;html=1;strokeColor=none;fillColor=#e6f3ff;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="44" width="310" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- 1 -->
+    <mxCell id="a1" value="SED Node gửi dữ liệu cảm biến" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="75" y="66" width="200" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- 2 -->
+    <mxCell id="a2" value="Border Router tiếp nhận gói CoAP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="75" y="126" width="200" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- 3 -->
+    <mxCell id="a2b" value="Đọc nội dung tin nhắn&#xa;và địa chỉ IP nguồn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="75" y="186" width="200" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- Subprocess dashed box -->
+    <mxCell id="sub" value="Xử lý và lưu dữ liệu node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;dashed=1;dashPattern=8 4;verticalAlign=top;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="58" y="256" width="228" height="228" as="geometry" />
+    </mxCell>
+
+    <!-- 4 -->
+    <mxCell id="a3" value="Phân tích JSON&#xa;Xác định ID node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="68" y="278" width="208" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 5 -->
+    <mxCell id="a4" value="Tìm hoặc thêm node vào danh sách&#xa;Cập nhật nhiệt độ / độ ẩm / CO₂ / TVOC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="68" y="348" width="208" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 6 -->
+    <mxCell id="a5" value="Tạo gói tin MQTT&#xa;chứa đầy đủ thông tin cảm biến" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="68" y="418" width="208" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 7: Decision -->
+    <mxCell id="d1" value="Kết nối MQTT&#xa;sẵn sàng?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="90" y="498" width="180" height="74" as="geometry" />
+    </mxCell>
+
+    <!-- 8: Skip -->
+    <mxCell id="e1" value="Bỏ qua, ghi nhật ký&#xa;cảnh báo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="302" y="511" width="188" height="48" as="geometry" />
+    </mxCell>
+
+    <!-- 9 -->
+    <mxCell id="a6" value="Xác định chủ đề (topic) gửi" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="75" y="592" width="200" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- 10 -->
+    <mxCell id="a7" value="Gửi dữ liệu lên MQTT Broker&#xa;(mã hóa TLS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="75" y="652" width="200" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 11 -->
+    <mxCell id="a8" value="HiveMQ Cloud&#xa;nhận và phân phối message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="75" y="722" width="200" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- HTTP local note -->
+    <mxCell id="httpnote" value="* Truy cập LAN: Trình duyệt gửi HTTP GET đến Border Router → nhận trang HTML hiển thị dữ liệu (tự làm mới mỗi 5 giây)" style="text;html=1;strokeColor=#aaaacc;fillColor=#f5f5f5;align=left;fontSize=9;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="800" width="415" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- ===== RIGHT: Web Dashboard ===== -->
+    <mxCell id="web_box" value="Web Dashboard (Trình duyệt)&#xa;Hosted: GitHub Pages / Render" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#0066cc;dashed=1;dashPattern=8 4;verticalAlign=top;fontSize=10;fontStyle=1;fontColor=#0066cc;" vertex="1" parent="1">
+      <mxGeometry x="498" y="710" width="309" height="338" as="geometry" />
+    </mxCell>
+
+    <!-- 12 -->
+    <mxCell id="w1" value="Kết nối đến cloud&#xa;qua WebSocket, lắng nghe dữ liệu mới" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="508" y="748" width="289" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 13 -->
+    <mxCell id="w2" value="Nhận dữ liệu&#xa;Xác định node tương ứng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="508" y="820" width="289" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 14 -->
+    <mxCell id="w3" value="Cập nhật giao diện và biểu đồ&#xa;theo thời gian thực" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="508" y="892" width="289" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- 15 -->
+    <mxCell id="w4" value="Kiểm tra ngưỡng cảnh báo&#xa;Nhiệt độ &gt; 35°C  |  CO₂ &gt; 2000 ppm&#xa;→ Phát cảnh báo âm thanh và hình ảnh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="508" y="964" width="289" height="68" as="geometry" />
+    </mxCell>
+
+    <!-- ===== ARROWS ===== -->
+
+    <mxCell id="ea12" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a1" target="a2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea22b" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a2" target="a2b" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea2ba3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a2b" target="a3" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea34" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a3" target="a4" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea45" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a4" target="a5" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea5d1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a5" target="d1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ed1e1" value="Không" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="d1" target="e1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ed1a6" value="Có" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="d1" target="a6" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea67" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a6" target="a7" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea78" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="a7" target="a8" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ea8w1" value="WebSocket" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;strokeColor=#0066cc;fontColor=#0066cc;fontSize=10;" edge="1" source="a8" target="w1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ew12" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="w1" target="w2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ew23" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="w2" target="w3" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="ew34" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="w3" target="w4" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Luu do thuat toan esp_ot_cli.c
+  Cot trai : KHOI TAO (app_main)
+  Cot phai : VONG LAP - sensor_task (doc 3 cam bien) + monitor_task + CoAP server
+  Cam bien khoi RE46C194 la phan bo sung theo thiet ke.
+-->
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="esp_ot_cli" id="flow">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1240" pageHeight="880" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Tieu de -->
+        <mxCell id="ti" value="KHỞI TẠO — app_main()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="10" width="260" height="26" as="geometry"/></mxCell>
+        <mxCell id="tl" value="VÒNG LẶP — sensor_task + monitor_task + CoAP server" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="400" y="10" width="800" height="26" as="geometry"/></mxCell>
+
+        <!-- ===== COT KHOI TAO ===== -->
+        <mxCell id="n1" value="BẮT ĐẦU — app_main()" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="60" y="48" width="220" height="44" as="geometry"/></mxCell>
+        <mxCell id="n2" value="Khởi tạo hệ thống&#10;nvs / esp_event / netif / eventfd" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="108" width="260" height="44" as="geometry"/></mxCell>
+        <mxCell id="n3" value="Khởi tạo I2C — i2cdev_init()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="168" width="260" height="36" as="geometry"/></mxCell>
+        <mxCell id="n4" value="Cảm biến SHT3x — sht3x_init()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="220" width="260" height="36" as="geometry"/></mxCell>
+        <mxCell id="n5" value="Cảm biến CCS811 — ccs811_init()&#10;(cấu hình GPIO WAK / RST)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="272" width="260" height="44" as="geometry"/></mxCell>
+        <mxCell id="n6" value="Cảm biến KHÓI RE46C194 — re46c194_init()&#10;(cấu hình chân ngắt INT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="332" width="260" height="44" as="geometry"/></mxCell>
+        <mxCell id="n7" value="OpenThread + Dataset&#10;esp_openthread_init() / otDatasetSetActive()&#10;otIp6SetEnabled() / otThreadSetEnabled()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="392" width="260" height="58" as="geometry"/></mxCell>
+        <mxCell id="n8" value="Khởi động CoAP&#10;otCoapStart() + otCoapAddResource(&quot;sensor&quot;)&#10;(server nhận &amp; relay từ SED)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="40" y="466" width="260" height="58" as="geometry"/></mxCell>
+        <mxCell id="n9" value="Tạo task&#10;xTaskCreate(sensor_task)&#10;xTaskCreate(monitor_task)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="540" width="260" height="56" as="geometry"/></mxCell>
+        <mxCell id="n10" value="esp_openthread_launch_mainloop()" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="40" y="612" width="260" height="44" as="geometry"/></mxCell>
+
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n1" target="n2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n2" target="n3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n4" target="n5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n5" target="n6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n6" target="n7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n7" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n8" target="n9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="n9" target="n10"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="tạo task" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;strokeColor=#9673a6;" edge="1" parent="1" source="n9" target="tl"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ===== sensor_task ===== -->
+        <mxCell id="s1" value="sensor_task()&#10;chờ Thread attach (vTaskDelay 8s)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="420" y="46" width="240" height="46" as="geometry"/></mxCell>
+        <mxCell id="s2" value="Đọc SHT3x — sht3x_measure()&#10;(nhiệt độ, độ ẩm)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="420" y="110" width="240" height="46" as="geometry"/></mxCell>
+        <mxCell id="s3" value="Nhiệt độ&#10;&gt; 24°C?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="470" y="176" width="140" height="78" as="geometry"/></mxCell>
+        <mxCell id="s4" value="Đọc CCS811 — ccs811_get_results()&#10;(retry tối đa 3 lần, CO₂/TVOC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="420" y="278" width="240" height="48" as="geometry"/></mxCell>
+        <mxCell id="s5" value="Bỏ qua CCS811&#10;co2 = tvoc = 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;" vertex="1" parent="1"><mxGeometry x="690" y="188" width="160" height="48" as="geometry"/></mxCell>
+        <mxCell id="s6" value="Đọc khói — re46c194_read()&#10;(RE46C194)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="420" y="350" width="240" height="48" as="geometry"/></mxCell>
+        <mxCell id="s7" value="Vượt ngưỡng (nhiệt độ / CO₂)&#10;hoặc phát hiện khói?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="450" y="416" width="180" height="84" as="geometry"/></mxCell>
+        <mxCell id="s8" value="Rút ngắn chu kỳ đo&#10;period = FAST_INTERVAL_MS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="420" y="524" width="240" height="48" as="geometry"/></mxCell>
+        <mxCell id="s9" value="Vai trò ≥ CHILD?&#10;otThreadGetDeviceRole()" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="450" y="596" width="180" height="84" as="geometry"/></mxCell>
+        <mxCell id="s10" value="Gửi CoAP lên Border Router&#10;coap_send()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="420" y="700" width="240" height="48" as="geometry"/></mxCell>
+        <mxCell id="s11" value="vTaskDelay(period)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="420" y="772" width="240" height="42" as="geometry"/></mxCell>
+
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s2" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="Có" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="Không" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s3" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s4" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;entryX=1;entryY=0.3;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s6" target="s7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="Có" style="edgeStyle=orthogonalEdgeStyle;html=1;fontColor=#b85450;" edge="1" parent="1" source="s7" target="s8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s8" target="s9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="Không (period chuẩn&#10;SENSOR_INTERVAL_MS)" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;entryX=1;entryY=0;" edge="1" parent="1" source="s7" target="s9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="Có" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s9" target="s10"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s10" target="s11"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="Không (chưa attach, bỏ qua gửi)" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="s9" target="s11"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="lặp lại" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="s11" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ===== monitor_task ===== -->
+        <mxCell id="m1" value="monitor_task()" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="940" y="60" width="220" height="44" as="geometry"/></mxCell>
+        <mxCell id="m2" value="otThreadGetDeviceRole()&#10;In vai trò trong mạng Thread&#10;vTaskDelay(5s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="940" y="124" width="220" height="64" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="m1" target="m2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell value="mỗi 5s" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;exitX=1;exitY=0.5;entryX=1;entryY=0;" edge="1" parent="1" source="m2" target="m2"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ===== CoAP server (relay tu SED) ===== -->
+        <mxCell id="sv0" value="CoAP server — sự kiện từ SED" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="940" y="250" width="220" height="26" as="geometry"/></mxCell>
+        <mxCell id="sv1" value="coap_relay_handler()&#10;nhận gói từ SED (URI &quot;sensor&quot;)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="940" y="288" width="220" height="54" as="geometry"/></mxCell>
+        <mxCell id="sv2" value="Gắn node_id từ IPv6 nguồn&#10;(bỏ qua nếu là gói loopback)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="940" y="356" width="220" height="50" as="geometry"/></mxCell>
+        <mxCell id="sv3" value="coap_relay_send()&#10;chuyển tiếp lên Border Router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="940" y="420" width="220" height="50" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="sv1" target="sv2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="sv2" target="sv3"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
